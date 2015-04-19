@@ -1,0 +1,22 @@
+{
+  "name": "MotionDetection",
+  "version": "0.1.0",
+  "description": "Detect Motion",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kureikain/md.git"
+  },
+  "author": "VInh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kureikain/md/issues"
+  },
+  "homepage": "https://github.com/kureikain/md",
+  "dependencies": {
+    "cheerio": "^0.19.0"
+  }
+}
