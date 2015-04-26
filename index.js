@@ -1,11 +1,13 @@
 var Hapi = require('hapi');
 var Phone = require('./src/call');
 var Sound = require('./src/sound');
+var Monitor = require('./src/monitor');
 
 // Create a server with a host and port
 var server = new Hapi.Server();
 var phone = new Phone();
 var sound = new Sound();
+var monitor = new Monitor();
 
 server.connection({ 
     host: 'arm.axcoto.com', 
@@ -42,4 +44,9 @@ server.route({
 // Start the server
 server.start(function () {
     console.log('Server running at:', server.info.uri);
-});
+})
+
+// Start monitoring service
+monitor.start({interval: 200}, function () {
+	console.log("Detected thief. Started warning")
+})
