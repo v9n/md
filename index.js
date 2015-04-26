@@ -1,28 +1,40 @@
-var Hapi = require('hapi');
-var Phone = require('./src/call');
-var Sound = require('./src/sound');
-var Monitor = require('./src/monitor');
+var Hapi = require('hapi')
+var Phone = require('./src/call')
+var Sound = require('./src/sound')
+var Monitor = require('./src/monitor')
 
 // Create a server with a host and port
-var server = new Hapi.Server();
-var phone = new Phone();
-var sound = new Sound();
-var monitor = new Monitor();
+var server = new Hapi.Server()
+var phone = new Phone()
+var sound = new Sound()
+var monitor = new Monitor()
 
 server.connection({ 
-    host: 'arm.axcoto.com', 
-    port: 8235,
-		address: '0.0.0.0'
+	host: 'arm.axcoto.com', 
+	port: 8235,
+	address: '0.0.0.0'
 });
+
+//static file
+server.route({
+	method: 'GET',
+	path: '/res/{param*}',
+	handler: {
+		directory: {
+			path: 'res',
+			listing: true
+		}
+	}
+})
 
 // Add the route
 server.route({
-    method: 'GET',
-    path:'/hello', 
-    handler: function (request, reply) {
-       reply('hello world');
-    }
-});
+	method: 'GET',
+	path:'/hello', 
+	handler: function (request, reply) {
+		reply('hello world');
+	}
+})
 
 server.route({
 	method: ['GET', 'POST'],
@@ -43,7 +55,7 @@ server.route({
 
 // Start the server
 server.start(function () {
-    console.log('Server running at:', server.info.uri);
+	console.log('Server running at:', server.info.uri);
 })
 
 // Start monitoring service

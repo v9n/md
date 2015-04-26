@@ -4,6 +4,11 @@
  *
  */
 var Promise = require('bluebird')
+var endpoint = {
+	miso : '192.168.1.117',
+	sushi: '192.168.1.121'
+}
+var IMAGE_PATH = "/image.jpg"
 
 module.exports = exports = monitor = function () {
 }
@@ -13,12 +18,13 @@ module.exports = exports = monitor = function () {
  * @cb callback
  */
 monitor.prototype.start = function (options, cb) {
-	options.interval = 200
+	options.interval = 800
 	this.onDetect = cb
-
-	setInterval(this.monitor.bind(this), options.interval)
+	
+	setInterval(this.monitor.bind(this), options.interval, endpoint.miso)
+	setInterval(this.monitor.bind(this), options.interval, endpoint.sushi)
 }
 
-monitor.prototype.monitor = function () {
-	console.log("Monitoring run at " + new Date().getTime())
+monitor.prototype.monitor = function (endpoint) {
+	console.log("Monitoring " + endpoint + " run at " + new Date().getTime())
 }
