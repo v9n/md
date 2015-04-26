@@ -1,9 +1,12 @@
 var Hapi = require('hapi');
 var Phone = require('./src/call');
-var phone = new Phone();
+var SOund = require('./src/sound');
 
 // Create a server with a host and port
 var server = new Hapi.Server();
+var phone = new Phone();
+var sound = new Sound();
+
 server.connection({ 
     host: 'arm.axcoto.com', 
     port: 8235,
@@ -20,12 +23,22 @@ server.route({
 });
 
 server.route({
-	method: 'POST',
+	method: ['GET', 'POST'],
 	path: '/call',
 	handler: function (request, reply) {
 		phone.callHome(reply)
 	}
 })
 
+server.play({
+	method: ['GET', 'POST'],
+	path: '/play',
+	handler: function (request, reply) {
+		reply('Play sound')
+	}
+})
+
 // Start the server
-server.start();
+server.start(function () {
+    console.log('Server running at:', server.info.uri);
+});

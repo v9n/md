@@ -19,6 +19,7 @@
   "dependencies": {
     "cheerio": "^0.19.0",
     "hapi": "^8.4.0",
+    "player": "^0.3.2",
     "twilio": "^2.0.0"
   }
 }
