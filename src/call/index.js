@@ -1,11 +1,39 @@
 var twilio = require('twilio');
+var async = require('async');
+
 var resp = new twilio.TwimlResponse();
+var TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN
+var TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID
+
+var alarmPhone = [
+	'14083872735',
+	'14083872696',
+]
 
 module.exports = exports = phone = function () {
 
-	
 }
 
+phone.prototype.alarm = function () {
+	//require the Twilio module and create a REST client 
+	var client = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN); 
+	 
+	async.each(alarmPhone, function (phone) {
+	
+		client.calls.create({ 
+			to: phone, 
+			from: "+14086578456", 
+			url: "http://arm.axcoto.com:8235/call",  
+			method: "GET",  
+			fallbackMethod: "GET",  
+			statusCallbackMethod: "GET",    
+			record: "false" 
+		}, function(err, call) { 
+			console.log(call.sid); 
+		});
+	})
+
+}
 
 phone.prototype.callHome = function (reply, options) {
 	//resp.say("Thief detecting. Press * to acknowledge, then hand up and call 911")

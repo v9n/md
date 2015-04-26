@@ -1,7 +1,9 @@
+var config = require('./src/config')
 var Hapi = require('hapi')
 var Phone = require('./src/call')
 var Sound = require('./src/sound')
 var Monitor = require('./src/monitor')
+var async = require('async')
 
 // Create a server with a host and port
 var server = new Hapi.Server()
@@ -45,11 +47,19 @@ server.route({
 })
 
 server.route({
+	method: ['GET'],
+	path: '/testAlarm',
+	handler: function (request, reply) {
+		async.parallel([sound.alarm, phone.alarm])
+	}
+})
+
+server.route({
 	method: ['GET', 'POST'],
 	path: '/play',
 	handler: function (request, reply) {
 		reply('Play sound')
-		sound.warning()
+		sound.alarm()
 	}
 })
 
@@ -61,4 +71,5 @@ server.start(function () {
 // Start monitoring service
 monitor.start({interval: 200}, function () {
 	console.log("Detected thief. Started warning")
+	async.parallel([sound.alarm, phone.alarm])
 })

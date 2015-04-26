@@ -5,11 +5,11 @@ module.exports = exports = noty = function (opt) {
 	this.resdir = RESDIR
 }
 
-noty.prototype.warning = function () {
+noty.prototype.alarm = function () {
 
 	var player = new Player([
-		this.resdir + 'cotrom.mp3',
-		this.resdir + 'cotrom.mp3'
+		RESDIR + 'cotrom.mp3',
+		REDIS + 'cotrom.mp3'
 	])
 
 	player.play(function(err, player) {
