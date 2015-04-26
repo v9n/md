@@ -50,6 +50,7 @@ server.route({
 	method: ['GET'],
 	path: '/testAlarm',
 	handler: function (request, reply) {
+		reply('Queue the sound alarm and phone alarm')
 		async.parallel([sound.alarm, phone.alarm])
 	}
 })
