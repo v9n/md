@@ -26,5 +26,5 @@ monitor.prototype.start = function (options, cb) {
 }
 
 monitor.prototype.monitor = function (endpoint) {
-	console.log("Monitoring " + endpoint + " run at " + new Date().getTime())
+	//console.log("Monitoring " + endpoint + " run at " + new Date().getTime())
 }
