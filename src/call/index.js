@@ -6,7 +6,7 @@ var TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN
 var TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID
 
 var alarmPhone = [
-	'14083872735',
+	//'14083872735',
 	'14083872696',
 ]
 
