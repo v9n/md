@@ -1,6 +1,6 @@
 var Hapi = require('hapi');
 var Phone = require('./src/call');
-var SOund = require('./src/sound');
+var Sound = require('./src/sound');
 
 // Create a server with a host and port
 var server = new Hapi.Server();
@@ -30,11 +30,12 @@ server.route({
 	}
 })
 
-server.play({
+server.route({
 	method: ['GET', 'POST'],
 	path: '/play',
 	handler: function (request, reply) {
 		reply('Play sound')
+		sound.warning()
 	}
 })
 
