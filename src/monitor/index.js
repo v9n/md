@@ -6,6 +6,7 @@
 var Promise = require('bluebird')
 var request = require('request')
 var async   = require('async')
+var fs      = require('fs')
 
 var DLINK_USER = process.env.DLINK_USER
 var DLINK_PASSWORD = process.env.DLINK_PASSWORD
@@ -24,23 +25,21 @@ module.exports = exports = monitor = function () {
  * @cb callback
  */
 monitor.prototype.start = function (options, cb) {
-	options.interval = 800
 	this.onDetect = cb
-	this.images = 
 
-	setInterval(this.monitor.bind(this), options.interval, endpoint.miso)
-	setInterval(this.monitor.bind(this), options.interval, endpoint.sushi)
+	setInterval(this.monitor.bind(this), options.interval, 'miso', endpoint.miso)
+	setInterval(this.monitor.bind(this), options.interval, 'sushi', endpoint.sushi)
 }
 
 /**
  * Monitoring logic happen here
  */
-monitor.prototype.monitor = function (endpoint) {
+monitor.prototype.monitor = function (device, endpoint) {
 	var cb = this.onDetect
 
 	async.forever(
 		function (next) {
-			download(endpoint + '/image.jpg', function () {
+			download(device, endpoint + '/image.jpg', function () {
 				
 			})	
 		},
@@ -53,12 +52,41 @@ monitor.prototype.monitor = function (endpoint) {
 /**
  * Download image from dink
  */
-var download = function(uri, callback){
-  request.get(
+var download = function (device, uri, callback) {
+	var filename = 1
+	calculateFilename('image', function (filename) {
+		request(uri)
+				.pipe(fs.createWriteStream('image/' + device + filename + '.jpg'))
+				.on('close', callback);
+	})
+  /*request.get(
 		uri, function(err, res, body){
 			//request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
 			//console.log(body)
 		}
-	)
+	)*/
 
 }
+
+var calculateFilename = function (directory, cb) {
+	var filename = 1
+	fs.exists(directory + '/1.jpg', function (exists) {
+		if (!exists) return cb(1)
+		fs.exists(directory + '/2.jpg', function (exists) {
+			if (!exists) return cb(2)
+			fs.exists(directory + '/3.jpg', function (exists) {
+				if (!exists) return cb(3)
+				fs.exists(directory + '/4.jpg', function (exists) {
+					if (!exists) return cb(4)
+						fs.exists(directory + '/5.jpg', function (exists) {
+							if (!exists) return cb(5)
+							//Now, we have enough files in our image pool
+							//we will archive first file
+							cb(5)	
+						})
+				})
+			})
+		})
+	})
+}
+
