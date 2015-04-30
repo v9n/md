@@ -21,7 +21,10 @@
     "bluebird": "^2.9.24",
     "cheerio": "^0.19.0",
     "dotenv": "^1.1.0",
+    "file-on-write": "^1.0.1",
     "hapi": "^8.4.0",
+    "mjpeg-consumer": "^0.4.0",
+    "motion": "^0.2.2",
     "player": "^0.3.2",
     "request": "^2.55.0",
     "twilio": "^2.0.0"
