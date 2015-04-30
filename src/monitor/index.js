@@ -7,6 +7,7 @@ var Promise = require('bluebird')
 var request = require('request')
 var async   = require('async')
 var fs      = require('fs')
+var motion  = require('./motion')
 
 var DLINK_USER = process.env.DLINK_USER
 var DLINK_PASSWORD = process.env.DLINK_PASSWORD

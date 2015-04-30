@@ -6,7 +6,8 @@ var TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN
 var TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID
 var TWILIO_FROM_NUMBER = process.env.PHONE_FROM
 var alarmPhone = [
-	process.env.PHONE_K
+	process.env.PHONE_K,
+	//process.env.PHONE_B,
 ]
 
 module.exports = exports = phone = function () {

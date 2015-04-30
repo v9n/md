@@ -3,6 +3,7 @@ var Hapi = require('hapi')
 var Phone = require('./src/call')
 var Sound = require('./src/sound')
 var Monitor = require('./src/monitor')
+var Motion = require('./src/monitor/motion')
 var async = require('async')
 
 // Create a server with a host and port
@@ -70,7 +71,8 @@ server.start(function () {
 })
 
 // Start monitoring service
-monitor.start({interval: 200}, function () {
+//monitor.start({interval: 200}, function () {
+Motion.start(function () {
 	console.log("Detected thief. Started warning")
 	async.parallel([sound.alarm, phone.alarm])
 })
