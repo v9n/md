@@ -54,9 +54,9 @@ monitor.prototype.monitor = function (device, endpoint) {
  */
 var download = function (device, uri, callback) {
 	var filename = 1
-	calculateFilename('image', function (filename) {
+	calculateFilename('image/' + device, function (filename) {
 		request(uri)
-				.pipe(fs.createWriteStream('image/' + device + filename + '.jpg'))
+				.pipe(fs.createWriteStream('image/' + device + "/" + filename + '.jpg'))
 				.on('close', callback);
 	})
   /*request.get(
