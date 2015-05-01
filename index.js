@@ -72,7 +72,7 @@ server.start(function () {
 
 // Start monitoring service
 //monitor.start({interval: 200}, function () {
-Motion.start(function () {
+Motion.start(["192.168.1.117", "192.168.1.121"], function () {
 	console.log("Detected thief. Started warning")
 	async.parallel([sound.alarm, phone.alarm])
 })

@@ -9,7 +9,7 @@ noty.prototype.alarm = function () {
 
 	var player = new Player([
 		RESDIR + 'cotrom.mp3',
-		RESDIR + 'cotrom.mp3'
+		//RESDIR + 'cotrom.mp3'
 	])
 
 	player.play(function(err, player) {

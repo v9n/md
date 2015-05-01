@@ -83,7 +83,10 @@ imageStream
 
 
 var Motion = require('motion').Motion
-var motion = new Motion()
+var motion = new Motion({
+	threshold: 0x15,
+	minChange: 8,
+})
 var getPixels = require("get-pixels")
 
 function monitor(ip, cb) {
@@ -110,23 +113,28 @@ module.exports = exports = function (options) {
 
 }
 
-exports.start = function (cb) {
-	console.log("Start motion moitoring")
-	async.forever(
-		function(next) {
-			monitor("192.168.1.117", function(rgb) {
-				setTimeout(function () {
-					monitor("192.168.1.117", function (rgb2) {
-						if (motion.detect(rgb, rgb2)) {
-							console.log('detected motion')
-							cb()
-						}
-						next()	
-					})
-				}, 100)
-			})
-		},
-		function(err) {
-		}
-	)
+exports.start = function (devices, cb) {
+	devices.forEach(function (device_ip) {
+		console.log("Start motion monitoring for: " + device_ip)
+		async.forever(
+			function(next) {
+				monitor(device_ip, function(rgb) {
+					setTimeout(function () {
+						monitor(device_ip, function (rgb2) {
+							if (motion.detect(rgb, rgb2)) {
+								console.log('detected motion on: ' + device_ip)
+								cb()
+								//pause 30s before next detection
+								setTimeout(next, 1000 * 30)
+							} else {
+								next()	
+							}
+						})
+					}, 50)
+				})
+			},
+			function(err) {
+			}
+		)
+	})
 }
