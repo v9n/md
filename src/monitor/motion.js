@@ -85,7 +85,7 @@ imageStream
 var Motion = require('motion').Motion
 var motion = new Motion({
 	threshold: 0x15,
-	minChange: 8,
+	minChange: 6,
 })
 var getPixels = require("get-pixels")
 
