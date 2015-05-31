@@ -3,3 +3,4 @@ image/*.jpg
 image/*/*.jpg
 .DS_Store
 *.log
+.env
