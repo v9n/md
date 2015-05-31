@@ -74,5 +74,5 @@ server.start(function () {
 //monitor.start({interval: 200}, function () {
 Motion.start(["192.168.1.117", "192.168.1.121"], function () {
 	console.log("Detected thief. Started warning")
-	async.parallel([sound.alarm, phone.alarm])
+	async.parallel([sound.alarm, phone.alarm, email.alarm])
 })
