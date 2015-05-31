@@ -30,5 +30,8 @@
     "player": "^0.3.2",
     "request": "^2.55.0",
     "twilio": "^2.0.0"
+  },
+  "devDependencies": {
+    "sinon": "^1.14.1"
   }
 }

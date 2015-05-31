@@ -6,6 +6,10 @@ var Monitor = require('./src/monitor')
 var Motion = require('./src/monitor/motion')
 var async = require('async')
 
+var Email = require('./src/email')
+var email = new Email()
+email.alarm()
+
 // Create a server with a host and port
 var server = new Hapi.Server()
 var phone = new Phone()
