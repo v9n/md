@@ -36,6 +36,12 @@ build:
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
     - script:
-        name: Unit Test
+        name: Install Depedencies
+        code: npm install
+    - script:
+        name: Unit test
+        code: mocha
+    - script:
+        name: Intergration test
         code: mocha
 

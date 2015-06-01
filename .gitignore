@@ -4,3 +4,6 @@ image/*/*.jpg
 .DS_Store
 *.log
 .env
+_builds
+_steps
+_projects
